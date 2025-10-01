@@ -45,8 +45,10 @@ export default function MovieDetail() {
       <div className=" w-[1080px] h-[524px] ml-[10%] mt-[5%] ">
         <div className="flex justify-between">
           <div>
-            <h1 className="text-black font-bold text-4xl">Wicked</h1>
-            <p className="text-black">2024.11.26 · PG · 2h 40m</p>
+            <h1 className="text-black font-bold text-4xl">
+              {upcomingMoviesData.title}
+            </h1>
+            <p className="text-black">{upcomingMoviesData.release_date}</p>
           </div>
           <div>
             <p className="font-bold">Rating</p>
@@ -54,11 +56,41 @@ export default function MovieDetail() {
               <Staricons />
               <div>
                 <p className="text-black font-bold">
-                  6.9 <span className="text-gray-500">/10</span>{" "}
+                  {upcomingMoviesData.vote_average}
+                  <span className="text-gray-500">/10</span>{" "}
                 </p>
                 <p className="text-gray-500">37k</p>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="flex gap-[32px] mt-5">
+          <img
+            src={`https://image.tmdb.org/t/p/original${upcomingMoviesData.poster_path}`}
+            className="w-[290px] h-[428px] rounded-lg"
+          ></img>
+          <img
+            src={`https://image.tmdb.org/t/p/original${upcomingMoviesData.backdrop_path}`}
+            className="w-[760px] h-[428px] rounded-lg"
+          ></img>
+        </div>
+      </div>
+      <div className="w-[1080px] h-[271px]  mt-[2%] ml-[10%]">
+        <div className="flex gap-2 ">
+          {upcomingMoviesData.genres?.map((genre, index) => (
+            <button
+              key={index}
+              className="h-7 flex items-center gap-5-2 px-4 cursor-pointer text-l font-bold border rounded-full border-[#ddd]"
+            >
+              {genre.name}
+            </button>
+          ))}
+        </div>
+        <p className="mt-5">{upcomingMoviesData.overview}</p>
+        <div className="mt-5">
+          <div className="flex gap-15">
+            <p className="font-bold">Director</p>
+            <p>{}</p>
           </div>
         </div>
       </div>
