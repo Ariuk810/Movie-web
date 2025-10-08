@@ -3,8 +3,7 @@ import { useState } from "react";
 import { Sumicons } from "../_icons/Sum";
 import { Genre } from "../_icons/Genre";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 export const Header = (props) => {
   const apiLink = "https://api.themoviedb.org/3/genre/movie/list?language=en";
   const options = {
@@ -15,7 +14,7 @@ export const Header = (props) => {
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzZiMzEwNzJlZDg5ODcwMzQxM2Y0NzkyYzZjZTdjYyIsIm5iZiI6MTczODAyNjY5NS44NCwic3ViIjoiNjc5ODJlYzc3MDJmNDkyZjQ3OGY2OGUwIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.k4OF9yGrhA2gZ4VKCH7KLnNBB2LIf1Quo9c3lGF6toE",
     },
   };
-  const router = useRouter;
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [genreData, setGenreData] = useState([]);
   const [showGenre, setShowGenre] = useState(false);
@@ -29,14 +28,16 @@ export const Header = (props) => {
   useEffect(() => {
     getData();
   }, []);
-
-  console.log("Golog", genreData);
+  const handleGenreClick = (id) => {
+    router.push(`/genres/${id}`);
+  };
+  // console.log("Golog", genreData);
   if (loading) return <div>Loading...</div>;
   return (
     <div>
       <div className="flex justify-between mt-[13px]">
         <div>
-          <img src="Logo.png"></img>
+          <img src="/Logo.png"></img>
         </div>
         <div className="gap-[10px] flex">
           <button
@@ -59,15 +60,14 @@ export const Header = (props) => {
                 <div className="mt-5 grid grid-cols-5 gap-5">
                   {genreData.map((genre, index) => {
                     return (
-                      <Link href={`/genres/${genre.id}`}>
-                        <button
-                          className="rounded-lg w-[76px] h-[25px] border border-gray-300 flex justify-center items-center text-[10px] font-bold"
-                          key={index}
-                        >
-                          {genre.name}
-                          <Sumicons />
-                        </button>
-                      </Link>
+                      <button
+                        className="rounded-lg w-[76px] h-[25px] border border-gray-300 flex justify-center items-center text-[10px] font-bold"
+                        key={index}
+                        onClick={() => handleGenreClick(genre.id)}
+                      >
+                        {genre.name}
+                        <Sumicons />
+                      </button>
                     );
                   })}
                 </div>
@@ -82,7 +82,7 @@ export const Header = (props) => {
         </div>
         <div>
           <button className="border w-[26px] h-[26px] rounded-lg">
-            <img src="Sar.png"></img>
+            <img src="/Sar.png"></img>
           </button>
         </div>
       </div>
