@@ -15,9 +15,9 @@ export const MovieList = (props) => {
   const { order, apiName, start, end, seemore, folder, showPage } = props;
   const [page, setPage] = useState(1);
   // console.log(folder, "asdasd");
-  const url = folder;
+
   const apiLink = `https://api.themoviedb.org/3/movie/${apiName}?language=en-US&page=${page}`;
-  console.log("asdasdadsdsa", showPage);
+  // console.log("asdasdadsdsa", showPage);
 
   const [upcomingMoviesData, setUpcomingMoviesData] = useState([]);
   const [loading, setLoading] = useState(false);

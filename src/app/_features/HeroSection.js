@@ -51,6 +51,7 @@ export const HeroSection = (props) => {
             handleSlideChange={handleSlideChange}
             // BackSlideChange={BackSlideChange}
             key={index}
+            movieId={movie.id}
             imgSrc={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
           />
         ))}

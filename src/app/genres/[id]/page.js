@@ -1,8 +1,10 @@
 "use client";
 import { MovieCard } from "@/app/_components/MovieCard";
+import { Footer } from "@/app/_features/Footer";
 import { Header } from "@/app/_features/Header";
 import { Sumicons } from "@/app/_icons/Sum";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const options = {
@@ -16,16 +18,16 @@ const options = {
 const buttonLink = "https://api.themoviedb.org/3/genre/movie/list?language=en";
 
 export default function Genres() {
+  const router = useRouter();
   const [genreData, setGenreData] = useState([]);
   const [genreMovieData, setGenreMovieData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-
-  // const nextpage = `https://api.themoviedb.org/3/movie/${apiName}?language=en-US&page=${page}`;
-
+  const [totalResults, setTotalResults] = useState(0);
   const param = useParams();
   const { id } = param;
-  const apiLink = `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${id}&page=${1}`;
+  const [loading, setLoading] = useState(false);
+  const apiLink = `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${id}&page=${page}`;
 
   const getData = async () => {
     const data = await fetch(buttonLink, options);
@@ -34,26 +36,29 @@ export default function Genres() {
     setGenreData(jsonData.genres);
   };
   const getData2 = async () => {
+    setLoading(true);
     const data = await fetch(apiLink, options);
     const jsonData1 = await data.json();
-    console.log("this is results uguig ni yaj shalgah ve", jsonData1);
+    console.log("asdfg", jsonData1);
     setGenreMovieData(jsonData1.results);
+    setTotalResults(jsonData1.total_results);
+    setTotalPages(jsonData1.total_pages);
+    setLoading(false);
   };
 
-  // const getData3 = async () => {
-  //   setLoading(true);
-  //   const data = await fetch(nextpage, options);
-  //   const jsonData3 = await data.json();
-  //   setTotalPages(jsonData3.total_pages);
-  // };
   useEffect(() => {
     getData();
     getData2();
-    // getData3();
-  }, []);
+  }, [page]);
   const handleGenreClick = (id) => {
     router.push(`/genres/${id}`);
   };
+
+  const selectedGenre = genreData.filter((item) => item.id == id);
+
+  // const manyMovie = genreMovieData.filter((item) => item.id == id);
+
+  if (loading) return <div>....loading</div>;
   return (
     <div>
       <Header />
@@ -68,7 +73,7 @@ export default function Genres() {
                 <button
                   className="rounded-lg w-[76px] h-[25px] border border-gray-300 flex justify-center items-center text-[10px] font-bold"
                   key={index}
-                  // onClick={() => handleGenreClick(genre.id)}
+                  onClick={() => handleGenreClick(genre.id)}
                 >
                   {genre.name}
                   <Sumicons />
@@ -78,7 +83,10 @@ export default function Genres() {
           </div>
         </div>
         <div className="mt-[7%]">
-          <h1 className="font-bold text-2xl">qwerty</h1>
+          <h1 className="font-bold text-2xl">
+            {totalResults} titles in "{selectedGenre[0]?.name}"
+            {/* {manyMovie[0]?.total_results} */}
+          </h1>
           <div className="flex flex-wrap gap-5">
             {genreMovieData.map((movie, index) => {
               return (
@@ -117,6 +125,7 @@ export default function Genres() {
           Next ▶
         </button>
       </div>
+      <Footer />
     </div>
   );
 }

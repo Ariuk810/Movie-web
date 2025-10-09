@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { Sumicons } from "@/app/_icons/Sum";
 import { Footer } from "@/app/_features/Footer";
 import { MovieCard } from "@/app/_components/MovieCard";
+import { Trailer } from "@/app/_icons/Trailer";
+import { useRouter } from "next/navigation";
 
 const options = {
   method: "GET",
@@ -24,6 +26,7 @@ export default function MovieDetail() {
   const [similarData, setSimilarData] = useState([]);
   const [crew, setCrew] = useState([]);
   const [cast, setCast] = useState([]);
+  const router = useRouter();
 
   const apiLink = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
   const getData = async () => {
@@ -66,6 +69,9 @@ export default function MovieDetail() {
     return <div>something wrong</div>;
   }
 
+  const handleSeeClick = (id) => {
+    router.push(`/more-like/${id}`);
+  };
   return (
     <div>
       <Header />
@@ -97,10 +103,18 @@ export default function MovieDetail() {
               src={`https://image.tmdb.org/t/p/original${upcomingMoviesData.poster_path}`}
               className="w-[290px] h-[428px] rounded-lg"
             ></img>
-            <img
-              src={`https://image.tmdb.org/t/p/original${upcomingMoviesData.backdrop_path}`}
-              className="w-[760px] h-[428px] rounded-lg"
-            ></img>
+            <div className="relative">
+              <img
+                src={`https://image.tmdb.org/t/p/original${upcomingMoviesData.backdrop_path}`}
+                className="w-[760px] h-[428px] rounded-lg"
+              ></img>
+              <div className="flex items-center absolute top-[85%] left-[3%] gap-3">
+                <button className="w-[40px] h-[40px] rounded-full bg-white   flex justify-center items-center cursor-pointer ">
+                  <Trailer />
+                </button>
+                <p className="text-white">Play trailer</p>
+              </div>
+            </div>
           </div>
         </div>
         <div className="w-[1080px] h-[271px]  mt-[2%] ml-[10%]">
@@ -149,7 +163,9 @@ export default function MovieDetail() {
           <div className="flex justify-between">
             <h1 className="font-bold text-black text-4xl ">More like this</h1>
             <div className="flex items-center ">
-              <p>See More</p>
+              <p className="cursor-pointer" onClick={() => handleSeeClick(id)}>
+                See More
+              </p>
               <Sumicons />
             </div>
           </div>
@@ -168,25 +184,6 @@ export default function MovieDetail() {
               })}
             </div>
           </div>
-
-          {/* <div className="flex gap-7 mt-[5%]">
-          {similarData.slice(2, 7).map((movie, index) => (
-            <div className="w-[190px] h-[372px] " key={index}>
-              <img
-                className="rounded-lg cursor-pointer"
-                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              ></img>
-              <div className="flex flex-col bg-gray-100 h-[87px]">
-                <div className="flex items-center">
-                  <Staricons />
-                  <span>{Math.round(movie.popularity)}</span>
-                  <span>/10</span>
-                </div>
-                <div>{movie.title}</div>
-              </div>
-            </div>
-          ))}
-        </div> */}
         </div>
       </div>
       <Footer />

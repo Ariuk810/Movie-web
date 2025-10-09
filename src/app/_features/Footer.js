@@ -7,7 +7,7 @@ export const Footer = () => {
       <div className="box-border bg-[#4338CA] w-full h-[280px]">
         <div className="flex justify-around">
           <div className="pt-[40px]">
-            <img src="Movielogo.png" />
+            <img src="/Movielogo.png" />
             <p className="text-white text-[16px] font-normal pt-[12px]">
               © 2024 Movie Z. All Rights Reserved.
             </p>
