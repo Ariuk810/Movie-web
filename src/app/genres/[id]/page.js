@@ -56,8 +56,6 @@ export default function Genres() {
 
   const selectedGenre = genreData.filter((item) => item.id == id);
 
-  // const manyMovie = genreMovieData.filter((item) => item.id == id);
-
   if (loading) return <div>....loading</div>;
   return (
     <div>
@@ -84,9 +82,9 @@ export default function Genres() {
         </div>
         <div className="mt-[7%]">
           <h1 className="font-bold text-2xl">
-            {totalResults} titles in "{selectedGenre[0]?.name}"
-            {/* {manyMovie[0]?.total_results} */}
+            {totalResults} titles in &quot;{selectedGenre[0]?.name}&quot;
           </h1>
+
           <div className="flex flex-wrap gap-5">
             {genreMovieData.map((movie, index) => {
               return (
