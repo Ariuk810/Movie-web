@@ -29,18 +29,21 @@ export const MovieList = (props) => {
 
     const jsonData = await data.json();
     setTotalPages(jsonData.total_pages);
-    // console.log("this is total pages", jsonData.total_pages);
     setUpcomingMoviesData(jsonData.results);
     setLoading(false);
   };
-  // console.log("loading", loading);
-  // console.log("upcominMoviesData", upcomingMoviesData);
 
   useEffect(() => {
     getData();
   }, [page]);
 
-  if (loading) return <div>....loading</div>;
+  if (loading)
+    return (
+      <div className="flex flex-col items-center justify-center  bg-gray-100 space-y-4 ">
+        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-blue-600 font-semibold text-lg">хүлээ...</p>
+      </div>
+    );
 
   return (
     <div className="flex flex-col ">
@@ -55,7 +58,7 @@ export const MovieList = (props) => {
       </div>
 
       <div className="flex justify-center">
-        <div className="grid grid-cols-5 gap-[40px]">
+        <div className="grid grid-cols-5 gap-[40px] max-md:grid-cols-2">
           {upcomingMoviesData.slice(start, end).map((movie, index) => {
             return (
               <MovieCard

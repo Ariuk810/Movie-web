@@ -15,10 +15,10 @@ export const SearchCard = (props) => {
   return (
     <div className="flex gap-5 mt-[5%] ml-[5%]">
       <div
-        className="w-[67px] h-[100px] rounded-lg cursor-pointer "
+        className="w-[67px] h-[100px] cursor-pointer "
         onClick={handleMovieClick}
       >
-        <img src={imgSrc}></img>
+        <img src={imgSrc} className="rounded-md"></img>
       </div>
       <div>
         <h4 className="font-bold text-xl">{title}</h4>

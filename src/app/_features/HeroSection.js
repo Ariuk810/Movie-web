@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { MovieSlide } from "../_components/MovieSlide";
-import { MovieCard } from "../_components/MovieCard";
 export const HeroSection = (props) => {
   const apiLink =
     " https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
@@ -40,7 +39,14 @@ export const HeroSection = (props) => {
     }
   };
 
-  if (loading) return <div>....loading</div>;
+  if (loading)
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-100 space-y-4">
+        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-blue-600 font-semibold text-lg">хүлээ ...</p>
+      </div>
+    );
+
   return (
     <div>
       {upcomingMoviesData

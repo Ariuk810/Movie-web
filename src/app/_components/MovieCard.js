@@ -14,13 +14,13 @@ export const MovieCard = (props) => {
   };
   return (
     <div
-      className="w-[229px] h-[439px] rounded-lg cursor-pointer "
+      className="w-[229px] h-[439px] cursor-pointer rounded-lg "
       onClick={handleMovieClick}
     >
       <div className="mt-10 ">
-        <img src={imgSrc} alt="movie"></img>
+        <img src={imgSrc} alt="movie" className="rounded-lg"></img>
       </div>
-      <div className="flex flex-col bg-gray-100 w-[230px] h-[95px]">
+      <div className="flex flex-col bg-gray-100 w-[230px] h-[95px] rounded-lg">
         <div className="flex items-center">
           <Staricons />
           <span>{rating}</span>

@@ -59,39 +59,46 @@ export const MovieSlide = ({
   }, [movieId]);
 
   return (
-    <div className="relative" style={{ width: "100vw" }}>
-      <img src={imgSrc} className="mt-[20px] w-[100vw]"></img>
-      <div className="absolute top-[20%] left-[10%]">
-        <h1 className="text-white text-[40px]">Now Playing:</h1>
-        <h2 className="text-white text-[80px] font-bold">{title}</h2>
-        <div className=" flex items-center">
+    <div className="relative">
+      <img src={imgSrc} className="mt-[20px]"></img>
+      <div className="absolute top-[20%] left-[10%] max-md:relative ">
+        <h1 className="text-white text-[40px] max-md:text-black max-md:text-[20px]">
+          Now Playing:
+        </h1>
+        <h2 className="text-white text-[80px] font-bold  max-md:text-black max-md:text-[40px]">
+          {title}
+        </h2>
+        <div className=" flex items-center ">
           <Staricons />
-          <span className="text-white">{rate}</span>
+          <span className="text-white  max-md:text-black">{rate}</span>
           <span className="text-gray-400">/10</span>
         </div>
-        <p className="  w-[302px] text-[white] ">{exp}</p>
+        <p className="  w-[302px] text-[white]   max-md:text-black">{exp}</p>
         <div
-          className={`flex justify-center items-center w-[145px] h-[40px] border bg-white rounded-lg cursor-pointer mt-5 ${
+          className={`flex justify-center items-center w-[145px] h-[40px] border bg-white rounded-lg cursor-pointer mt-5 max-md:bg-black${
             trailerUrl ? "" : "opacity-50 cursor-not-allowed"
           }`}
           onClick={() => trailerUrl && setShowTrailer(true)}
         >
           <Trailer />
-          <button className="cursor-pointer">Watch Trailer</button>
+
+          <button className="cursor-pointer max-md:text-white">
+            Watch Trailer
+          </button>
         </div>
       </div>
-      <div className="absolute top-[50%] left-[95%]">
+      <div className="absolute top-[50%] left-[95%] max-md:top-[20%] max-md:left-[90%]">
         <button
           onClick={handleSlideChange}
-          className="flex justify-center items-center bg-white rounded-full w-[60px] h-[60px] "
+          className="flex justify-center items-center bg-white rounded-full w-[60px] max-md:w-[30px] h-[60px] max-md:h-[30px]"
         >
           <Sumicons />
         </button>
       </div>
-      <div className="absolute top-[50%] ">
+      <div className="absolute top-[50%]  max-md:top-[20%] max-md:left-5">
         <button
           onClick={BackSlideChange}
-          className="flex justify-center items-center bg-white rounded-full w-[60px] h-[60px] "
+          className="flex justify-center items-center bg-white rounded-full w-[60px] max-md:w-[30px] h-[60px] max-md:h-[30px]"
         >
           <LeftSumiconst />
         </button>

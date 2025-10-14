@@ -218,7 +218,7 @@ export default function MovieDetail() {
       {/* Trailer popup */}
       {showTrailer && trailerUrl && (
         <div
-          className="fixed inset-0  bg-opacity-80 flex justify-center items-center z-50"
+          className="fixed inset-0 bg-opacity-80 flex justify-center items-center z-50"
           onClick={() => setShowTrailer(false)}
         >
           <div
